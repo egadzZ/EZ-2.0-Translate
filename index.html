@@ -10,7 +10,7 @@
 <title>EZ Translate</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#f6f5f1;
@@ -32,7 +32,7 @@
   --maxw:440px;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
+html,body{height:100%;width:100%;max-width:100%;overflow-x:hidden}
 body{
   font-family:"JetBrains Mono",ui-monospace,monospace;
   background:#050505;
@@ -68,7 +68,7 @@ header{
 }
 .logo{display:flex;align-items:center;gap:10px}
 .logo svg{width:26px;height:26px}
-.wordmark{font-weight:700;font-size:16px;letter-spacing:.28em;padding-left:.28em}
+.wordmark{font-family:"Archivo","JetBrains Mono",sans-serif;font-weight:900;font-stretch:125%;font-size:20px;letter-spacing:.04em;text-transform:uppercase}
 .badge{
   font-size:10px;font-weight:600;letter-spacing:.12em;
   color:var(--green);background:var(--green-bg);
@@ -80,7 +80,7 @@ header{
 
 /* ===== Scroll area ===== */
 main{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;position:relative}
-.view{display:none;padding:18px 16px 26px;animation:fade .28s ease}
+.view{display:none;padding:18px 20px 28px;animation:fade .28s ease}
 .view.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
@@ -91,11 +91,11 @@ main{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:
   background:var(--bg-card);
 }
 .lang-pill{
-  padding:16px 8px;text-align:center;background:transparent;transition:.18s;
+  padding:3px 8px;text-align:center;background:transparent;transition:.18s;
 }
 .lang-pill.act{background:var(--black);color:var(--white)}
-.lang-pill .code{font-size:19px;font-weight:700;letter-spacing:.1em;display:block}
-.lang-pill .name{font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:.04em}
+.lang-pill .code{font-size:16px;font-weight:700;letter-spacing:.1em;display:block;line-height:1.15}
+.lang-pill .name{font-size:9px;color:var(--muted);margin-top:0;letter-spacing:.04em}
 .lang-pill.act .name{color:#aeaea6}
 .swap{
   border-left:2px solid var(--line-strong);border-right:2px solid var(--line-strong);
@@ -153,7 +153,7 @@ textarea#src::placeholder{color:var(--muted-2)}
 .rtop{padding:22px 20px 18px}
 .rtrans{
   font-size:27px;font-weight:800;line-height:1.12;color:#fff;letter-spacing:-.01em;
-  word-break:break-word;
+  word-break:break-word;overflow-wrap:anywhere;
 }
 .rorig{margin-top:12px;font-size:13px;color:#8d8d86;line-height:1.45}
 .rmeta{
@@ -226,7 +226,7 @@ textarea#src::placeholder{color:var(--muted-2)}
 .hist-head p{font-size:13px;color:var(--muted);margin-top:7px}
 .hist-item{padding:22px 4px;border-bottom:1px solid var(--line);cursor:pointer;transition:.15s}
 .hist-item:active{background:#efeee8}
-.hist-item h3{font-size:22px;font-weight:700;letter-spacing:-.01em;word-break:break-word}
+.hist-item h3{font-size:22px;font-weight:700;letter-spacing:-.01em;word-break:break-word;overflow-wrap:anywhere}
 .hist-item .sub{font-size:13px;color:var(--muted);margin-top:7px;line-height:1.4}
 .hist-item .htag{
   display:inline-block;margin-top:13px;font-size:10px;font-weight:700;letter-spacing:.1em;
@@ -259,7 +259,7 @@ nav{
   transition:opacity .5s ease;
 }
 #splash.hide{opacity:0;pointer-events:none}
-#splash .sw{font-size:20px;font-weight:700;letter-spacing:.42em;color:#fff;padding-left:.42em}
+#splash .sw{font-family:"Archivo","JetBrains Mono",sans-serif;font-weight:900;font-stretch:125%;font-size:30px;letter-spacing:.06em;color:#fff;text-transform:uppercase}
 #splash .dots{display:flex;gap:9px;margin-top:34px}
 #splash .dots i{width:6px;height:6px;border-radius:50%;background:#555;animation:pulse 1.3s infinite}
 #splash .dots i:nth-child(2){animation-delay:.2s}
@@ -307,10 +307,6 @@ nav{
   <!-- Header -->
   <header>
     <div class="logo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 5h7M7.5 5c0 4-1.5 7-4 9"/><path d="M5 9c1.5 2.5 3.5 4 6 5"/>
-        <path d="M13 19l3.5-9 3.5 9M14.5 16h4"/>
-      </svg>
       <span class="wordmark">EZ TRANSLATE</span>
     </div>
     <button class="badge" id="badge" title="Configurar API key">
@@ -433,7 +429,7 @@ nav{
    Ej: "https://ez-translate.tu-usuario.workers.dev"
    Si lo dejas vacío (""), la app pide tu API key como antes (modo personal). */
 const PROXY_URL = "https://eztranslate.marcoosorio-de.workers.dev";
-  
+
 const LANGS = {
   ES: {code:"ES", name:"español",  full:"español", speech:"es-ES"},
   DE: {code:"DE", name:"deutsch",  full:"alemán",  speech:"de-DE"},
@@ -512,11 +508,12 @@ REGLAS:
 - Traduce de forma NATURAL, como lo diría un nativo en una situación real, no palabra por palabra.
 - Clasifica el REGISTRO del resultado con UNA etiqueta corta en MAYÚSCULAS. Para alemán usa una de: AMT-DEUTSCH (oficinas/trámites), ALLTAGSDEUTSCH (día a día), BERLINERISCH (jerga de Berlín), COLLOQUIAL (coloquial), FORMELL (formal). Para español o inglés usa: COLOQUIAL, FORMAL o NEUTRO.
 - "register_note": una nota MUY breve (máx 6 palabras) en español que explique ese registro (ej: "usado en oficinas oficiales").
-- "tip": si hay un dato cultural, de uso o un consejo útil (sobre todo de Berlín o de trámites), inclúyelo en 1-2 frases en español. Si no aplica, pon null.
+- "example": una frase de ejemplo NATURAL y cotidiana en ${tgtL.full} que use la traducción (o la palabra clave traducida) en un contexto real de uso. Que sea corta y útil.
+- "example_translation": esa misma frase de ejemplo traducida a ${srcL.full}, para que se entienda.
 - "alternative": una forma alternativa común del resultado, o null.
 
 Responde ÚNICAMENTE con un objeto JSON válido, SIN texto extra, SIN markdown, SIN bloques de código. Forma exacta:
-{"translation":"...","register":"...","register_note":"...","tip":null,"alternative":null}`;
+{"translation":"...","register":"...","register_note":"...","example":"...","example_translation":"...","alternative":null}`;
 }
 
 async function callClaude(messages, system){
@@ -576,7 +573,7 @@ async function doTranslate(){
 function renderResult(r, target){
   const tgtSpeech = LANGS[r.tgtCode].speech;
   const eng = state.model.includes("opus")?"Claude Opus":state.model.includes("haiku")?"Claude Haiku":"Claude Sonnet";
-  const tipHTML = r.tip ? `<div class="tip"><span class="ic">📍</span><div><b>Tip:</b> ${esc(r.tip)}</div></div>` : "";
+  const exHTML = r.example ? `<div class="tip"><span class="ic">💬</span><div><b>Ejemplo:</b> ${esc(r.example)}${r.example_translation?`<br><span style="color:var(--muted-2)">${esc(r.example_translation)}</span>`:""}</div></div>` : "";
   const altHTML = r.alternative ? `<div class="ralt"><b>Alternativa:</b> ${esc(r.alternative)}</div>` : "";
   const el = $(target);
   el.innerHTML = `
@@ -594,7 +591,7 @@ function renderResult(r, target){
        <button class="audio-btn" data-act="slow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> LENTO</button>
        <span class="audio-eng">${eng} · ${LANGS[r.tgtCode].full}</span>
      </div>
-     ${tipHTML}
+     ${exHTML}
      ${altHTML}
      <div class="rfoot">
        <button data-act="copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> COPIAR</button>
@@ -616,12 +613,36 @@ function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&l
 let voices=[];
 function loadVoices(){ voices = window.speechSynthesis ? speechSynthesis.getVoices() : []; }
 if(window.speechSynthesis){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
+
+// Pick the most natural voice available for a language.
+function pickVoice(lang){
+  const base = lang.split("-")[0];
+  const match = voices.filter(v => v.lang===lang || v.lang.replace("_","-").startsWith(base));
+  if(!match.length) return null;
+  // Higher score = more natural. Prefer Google/Natural/Premium/online voices, avoid "compact".
+  const score = v => {
+    const n = (v.name||"").toLowerCase();
+    let s = 0;
+    if(n.includes("google")) s += 6;          // Chrome/Android network voices (very natural)
+    if(n.includes("natural")) s += 6;         // Edge/Windows neural voices
+    if(n.includes("premium")||n.includes("enhanced")||n.includes("neural")) s += 5;
+    if(/siri|samantha|anna|daniel|paulina|monica|helena|jorge|diego/.test(n)) s += 3; // good OS voices
+    if(!v.localService) s += 2;               // online voices usually sound better
+    if(n.includes("compact")) s -= 4;         // iOS low-quality voices
+    if(v.lang===lang) s += 1;                 // exact locale match
+    return s;
+  };
+  return match.sort((a,b)=>score(b)-score(a))[0];
+}
+
 function speak(text, lang, rate){
   if(!window.speechSynthesis){ toast("Audio no disponible"); return; }
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text);
-  u.lang=lang; u.rate=rate;
-  const v=voices.find(v=>v.lang===lang)||voices.find(v=>v.lang.startsWith(lang.split("-")[0]));
+  u.lang=lang;
+  u.rate=rate;          // 1 = normal, .6 = lento
+  u.pitch=1;
+  const v=pickVoice(lang);
   if(v) u.voice=v;
   speechSynthesis.speak(u);
 }
@@ -694,7 +715,7 @@ function saveHistory(r){
   state.history.unshift({
     translation:r.translation, original:r.original,
     register:r.register, register_note:r.register_note,
-    tip:r.tip||null, alternative:r.alternative||null,
+    example:r.example||null, example_translation:r.example_translation||null, alternative:r.alternative||null,
     srcCode:r.srcCode, tgtCode:r.tgtCode, t:Date.now()
   });
   state.history=state.history.slice(0,50);
