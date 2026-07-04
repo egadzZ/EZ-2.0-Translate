@@ -1,19 +1,18 @@
-/* EZ Translate — service worker
-   Cachea la "cáscara" de la app para que abra rápido / sin red.
-   NUNCA cachea las traducciones (esas siempre van en vivo al proxy). */
-const CACHE = "ez-translate-v1";
+/* Solo Speak — service worker */
+const CACHE = "solo-speak-v2";
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.json",
   "./icon-192.png",
-  "./icon-512.png"
+  "./icon-512.png",
+  "./logo-header.png",
+  "./logo-splash.png"
 ];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));
 });
-
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys().then((keys) =>
@@ -21,14 +20,9 @@ self.addEventListener("activate", (e) => {
     ).then(() => self.clients.claim())
   );
 });
-
 self.addEventListener("fetch", (e) => {
   const url = e.request.url;
-  // Nunca interceptar llamadas a la API / proxy: siempre en vivo.
-  if (url.includes("workers.dev") || url.includes("anthropic.com") || e.request.method !== "GET") {
-    return; // deja pasar normal a la red
-  }
-  // Para los archivos de la app: primero red, si falla usa caché.
+  if (url.includes("workers.dev") || url.includes("anthropic.com") || e.request.method !== "GET") return;
   e.respondWith(
     fetch(e.request)
       .then((res) => {

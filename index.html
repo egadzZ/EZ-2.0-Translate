@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="EZ Translate">
+<meta name="apple-mobile-web-app-title" content="Solo Speak">
 <meta name="theme-color" content="#0a0a0a">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" type="image/png" href="icon-192.png">
-<title>EZ Translate</title>
+<title>Solo Speak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,900&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -27,6 +27,9 @@
   --green:#3f7a45;
   --green-bg:#e2f0e0;
   --green-line:#bcdcb8;
+  --vamp:#7a1a2a;
+  --vamp-bg:#f4e2e5;
+  --vamp-line:#dcb8c0;
   --tag-bg:#ebeae4;
   --black:#0a0a0a;
   --white:#fbfaf7;
@@ -70,12 +73,11 @@ header{
   z-index:5;
 }
 .logo{display:flex;align-items:center;gap:10px}
-.logo svg{width:26px;height:26px}
-.wordmark{font-family:"Archivo","JetBrains Mono",sans-serif;font-weight:900;font-stretch:125%;font-size:20px;letter-spacing:.04em;text-transform:uppercase}
+.logo img{height:34px;width:auto;display:block}
 .badge{
   font-size:10px;font-weight:600;letter-spacing:.12em;
-  color:var(--green);background:var(--green-bg);
-  border:1px solid var(--green-line);border-radius:999px;
+  color:var(--vamp);background:var(--vamp-bg);
+  border:1px solid var(--vamp-line);border-radius:999px;
   padding:5px 11px;display:flex;align-items:center;gap:5px;
   cursor:pointer;
 }
@@ -108,16 +110,6 @@ main{flex:1 1 auto;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:
 .swap:active{transform:scale(.9)}
 
 /* ===== Buttons / inputs ===== */
-.shortcut{
-  width:100%;margin-top:12px;padding:14px;border-radius:11px;
-  background:#edece6;border:1px solid var(--line);
-  display:flex;align-items:center;justify-content:center;gap:9px;
-  font-size:12px;font-weight:600;letter-spacing:.16em;color:var(--ink-soft);
-  transition:.15s;
-}
-.shortcut:active{background:#e3e2db}
-.shortcut svg{width:16px;height:16px}
-
 .input-wrap{
   margin-top:12px;border:2px solid var(--line-strong);border-radius:12px;
   background:var(--bg-card);overflow:hidden;
@@ -141,11 +133,11 @@ textarea#src::placeholder{color:var(--muted-2)}
 
 .btn-primary{
   width:100%;margin-top:14px;padding:18px;border-radius:12px;
-  background:var(--black);color:var(--white);
+  background:var(--vamp);color:var(--white);
   font-size:14px;font-weight:700;letter-spacing:.26em;padding-left:.26em;
   transition:.15s;
 }
-.btn-primary:active{transform:scale(.985)}
+.btn-primary:active{transform:scale(.985);background:#5c1320}
 .btn-primary:disabled{background:#b8b7b1;cursor:not-allowed}
 
 /* ===== Result card ===== */
@@ -163,7 +155,7 @@ textarea#src::placeholder{color:var(--muted-2)}
   background:#f1f0ea;padding:14px 18px;display:flex;align-items:center;gap:11px;flex-wrap:wrap;
 }
 .tag{
-  font-size:10px;font-weight:700;letter-spacing:.1em;background:var(--black);color:#fff;
+  font-size:10px;font-weight:700;letter-spacing:.1em;background:var(--vamp);color:#fff;
   padding:6px 11px;border-radius:5px;white-space:nowrap;
 }
 .rnote{font-size:12px;color:var(--muted);flex:1;min-width:120px}
@@ -195,6 +187,15 @@ textarea#src::placeholder{color:var(--muted-2)}
 .rfoot button:not(:last-child){border-right:1px solid #deded7}
 .rfoot button:active{background:#e9e8e2}
 .rfoot svg{width:14px;height:14px}
+
+.more-btn{
+  display:block;width:calc(100% - 36px);margin:0 18px 16px;padding:12px;
+  background:#f1f0ea;border:1px dashed #9c9b95;border-radius:10px;
+  font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--ink-soft);
+  transition:.15s;
+}
+.more-btn:active{background:#e6e5df}
+.more-btn:disabled{opacity:.6;cursor:wait}
 
 /* spinner */
 .spin{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:rot .7s linear infinite;display:inline-block}
@@ -262,7 +263,7 @@ nav{
   transition:opacity .5s ease;
 }
 #splash.hide{opacity:0;pointer-events:none}
-#splash .sw{font-family:"Archivo","JetBrains Mono",sans-serif;font-weight:900;font-stretch:125%;font-size:30px;letter-spacing:.06em;color:#fff;text-transform:uppercase}
+#splash img{width:min(70%, 320px);height:auto;display:block}
 #splash .dots{display:flex;gap:9px;margin-top:34px}
 #splash .dots i{width:6px;height:6px;border-radius:50%;background:#555;animation:pulse 1.3s infinite}
 #splash .dots i:nth-child(2){animation-delay:.2s}
@@ -275,7 +276,7 @@ nav{
 .modal-card{background:var(--bg-card);border-radius:16px;border:2px solid var(--line-strong);width:100%;max-width:380px;padding:24px;animation:reveal .3s ease}
 .modal-card h2{font-size:15px;font-weight:700;letter-spacing:.14em;margin-bottom:6px}
 .modal-card p{font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:18px}
-.modal-card p a{color:var(--green);font-weight:600}
+.modal-card p a{color:var(--vamp);font-weight:600}
 .modal-card label{font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--ink-soft);display:block;margin-bottom:8px}
 .modal-card input{
   width:100%;border:2px solid var(--line-strong);border-radius:10px;padding:13px;font-size:13px;
@@ -288,7 +289,7 @@ nav{
 .btn-save{background:var(--black);color:#fff}
 .btn-cancel{background:#edece6;color:var(--ink-soft)}
 .key-status{font-size:11px;color:var(--muted);margin-top:12px}
-.key-status.ok{color:var(--green)}
+.key-status.ok{color:var(--vamp)}
 
 .toast{
   position:absolute;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);
@@ -303,14 +304,14 @@ nav{
 
   <!-- Splash -->
   <div id="splash">
-    <div class="sw">EZ&nbsp;TRANSLATE</div>
+    <img src="logo-splash.png" alt="Solo Speak">
     <div class="dots"><i></i><i></i><i></i></div>
   </div>
 
   <!-- Header -->
   <header>
     <div class="logo">
-      <span class="wordmark">EZ TRANSLATE</span>
+      <img src="logo-header.png" alt="Solo Speak">
     </div>
     <button class="badge" id="badge" title="Configurar API key">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
@@ -328,11 +329,6 @@ nav{
         <button class="swap" id="swap">⇅</button>
         <button class="lang-pill" id="pillTgt"><span class="code">DE</span><span class="name">deutsch</span></button>
       </div>
-
-      <button class="shortcut" id="goCam">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        CAMERA
-      </button>
 
       <div class="input-wrap">
         <textarea id="src" maxlength="5000" placeholder="Escribe algo para traducir..."></textarea>
@@ -424,13 +420,10 @@ nav{
 
 <script>
 /* ============================================================
-   EZ TRANSLATE — Claude-powered translator
+   SOLO SPEAK — Claude-powered translator
    Single-file, static. Works on GitHub Pages.
    ============================================================ */
 
-/* ⬇⬇⬇  PEGA AQUÍ LA URL DE TU CLOUDFLARE WORKER  ⬇⬇⬇
-   Ej: "https://ez-translate.tu-usuario.workers.dev"
-   Si lo dejas vacío (""), la app pide tu API key como antes (modo personal). */
 const PROXY_URL = "https://eztranslate.marcoosorio-de.workers.dev";
 
 const LANGS = {
@@ -439,7 +432,6 @@ const LANGS = {
   EN: {code:"EN", name:"english",  full:"inglés",  speech:"en-US"}
 };
 
-/* ---- safe storage (degrades to memory if unavailable, e.g. sandbox) ---- */
 const mem = {};
 const store = {
   get(k){ try{ return localStorage.getItem(k); }catch(e){ return mem[k] ?? null; } },
@@ -453,7 +445,8 @@ const state = {
   apiKey: store.get("ez_key") || "",
   model: store.get("ez_model") || "claude-sonnet-4-6",
   history: JSON.parse(store.get("ez_hist") || "[]"),
-  lastResult: null
+  lastResult: null,
+  lastCamResult: null
 };
 
 const $ = s => document.querySelector(s);
@@ -462,10 +455,8 @@ const toast = (msg) => {
   clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove("show"), 1900);
 };
 
-/* =================== Splash =================== */
 setTimeout(()=> $("#splash").classList.add("hide"), 1500);
 
-/* =================== Tabs =================== */
 document.querySelectorAll(".nav-btn").forEach(btn=>{
   btn.addEventListener("click", ()=> switchView(btn.dataset.view));
 });
@@ -475,9 +466,6 @@ function switchView(name){
   $("#view-"+name).classList.add("active");
   if(name==="history") renderHistory();
 }
-$("#goCam").addEventListener("click", ()=> switchView("camera"));
-
-/* =================== Language selector =================== */
 function renderLangs(){
   const s=LANGS[state.src], t=LANGS[state.tgt];
   $("#pillSrc").innerHTML = `<span class="code">${s.code}</span><span class="name">${s.name}</span>`;
@@ -489,7 +477,7 @@ function cycle(which){
   const cur = which==="src"?state.src:state.tgt;
   const other = which==="src"?state.tgt:state.src;
   let i=(order.indexOf(cur)+1)%3;
-  while(order[i]===other) i=(i+1)%3;       // skip the language used on the other side
+  while(order[i]===other) i=(i+1)%3;
   if(which==="src") state.src=order[i]; else state.tgt=order[i];
   renderLangs();
 }
@@ -498,28 +486,45 @@ $("#pillTgt").addEventListener("click",()=>cycle("tgt"));
 $("#swap").addEventListener("click",()=>{ [state.src,state.tgt]=[state.tgt,state.src]; renderLangs(); $("#swap").style.transform="rotate(180deg)"; setTimeout(()=>$("#swap").style.transform="",200); });
 renderLangs();
 
-/* =================== Char counter =================== */
 $("#src").addEventListener("input", e=> $("#cnt").textContent = e.target.value.length);
 
-/* =================== Claude API call =================== */
 function buildSystem(srcL, tgtL){
-  return `Eres EZ Translate, un motor de traducción especializado en alemán, español e inglés tal como se usan EN LA VIDA REAL y el día a día — NO en traducción literal ni académica. Tu fuerte es el alemán cotidiano, el de la calle de Berlín y el de los trámites oficiales (Amt-Deutsch).
+  return `Eres Solo Speak, un traductor entre alemán, español e inglés. Tu objetivo es traducir como lo diría un ADULTO NATIVO EDUCADO en una conversación normal — el registro del día a día real, no el de un libro de texto ni el de la calle.
 
 Vas a recibir un texto en ${srcL.full} y debes traducirlo a ${tgtL.full}.
 
-REGLAS:
-- Traduce de forma NATURAL, como lo diría un nativo en una situación real, no palabra por palabra.
-- Clasifica el REGISTRO del resultado con UNA etiqueta corta en MAYÚSCULAS. Para alemán usa una de: AMT-DEUTSCH (oficinas/trámites), ALLTAGSDEUTSCH (día a día), BERLINERISCH (jerga de Berlín), COLLOQUIAL (coloquial), FORMELL (formal). Para español o inglés usa: COLOQUIAL, FORMAL o NEUTRO.
-- "register_note": una nota MUY breve (máx 6 palabras) en español que explique ese registro (ej: "usado en oficinas oficiales").
-- "example": una frase de ejemplo NATURAL y cotidiana en ${tgtL.full} que use la traducción (o la palabra clave traducida) en un contexto real de uso. Que sea corta y útil.
-- "example_translation": esa misma frase de ejemplo traducida a ${srcL.full}, para que se entienda.
-- "alternative": una forma alternativa común del resultado, o null.
+REGLAS DE TONO (muy importante):
+- Traduce NATURAL: como se hablaría en el trabajo entre colegas, con amigos, con vecinos, en una tienda o restaurante.
+- NO uses jerga fuerte, dialectos regionales, slang de barrio ni expresiones que solo entienden ciertos grupos (nada de "Berlinerisch", nada de "yo, bro", nada de "guay/chido" salvo que el original lo pida).
+- NO uses lenguaje académico, literal, arcaico ni excesivamente formal. Evita frases que suenen "traducidas de libro".
+- El texto original manda: si es formal, mantén formal; si es casual, mantén casual; si es técnico, mantén técnico. Nunca inventes un tono más informal ni más formal que el original.
+- Para alemán: prefiere el "Hochdeutsch" hablado y natural, el que se oye en oficina y en la vida diaria — no Amt-Deutsch rígido, no dialecto.
+
+CLASIFICACIÓN DE REGISTRO:
+- "register": UNA etiqueta corta en MAYÚSCULAS que describa el registro real del resultado. Usa NEUTRO por defecto. Solo usa otras si el texto lo justifica claramente:
+  - Alemán: NEUTRO (por defecto), FORMAL (correos formales, trámites, tratos con "Sie"), CASUAL (mensajes con amigos, tono relajado), AMT-DEUTSCH (SOLO si es texto oficial/burocrático real), COLOQUIAL (SOLO si el original ya trae expresiones coloquiales claras).
+  - Español/Inglés: NEUTRO, FORMAL, CASUAL, COLOQUIAL.
+- "register_note": nota MUY breve en español (máx 6 palabras) explicando el registro (ej: "conversación normal", "correo de trabajo", "entre amigos").
+
+CAMPOS ADICIONALES:
+- "example": una frase corta y natural en ${tgtL.full} que muestre la traducción (o palabra clave) usada en un contexto REAL cotidiano. Nada rebuscado.
+- "example_translation": esa misma frase traducida a ${srcL.full}.
+- "alternative": otra forma común de decirlo en ${tgtL.full}, o null si no aplica.
 
 Responde ÚNICAMENTE con un objeto JSON válido, SIN texto extra, SIN markdown, SIN bloques de código. Forma exacta:
 {"translation":"...","register":"...","register_note":"...","example":"...","example_translation":"...","alternative":null}`;
 }
 
-async function callClaude(messages, system){
+/* Prompt "ligero" para la cámara: solo traducción + texto detectado. Rápido. */
+function buildSystemCamera(srcL, tgtL){
+  return `Eres Solo Speak. Vas a recibir una FOTO con texto en ${srcL.full}. Léelo (OCR) y tradúcelo a ${tgtL.full} de forma NATURAL y cotidiana — como lo diría un adulto nativo educado, sin jerga de barrio y sin sonar académico. Mantén el tono del original.
+
+Responde ÚNICAMENTE con este JSON, sin nada más:
+{"translation":"...","detected":"..."}
+Si no hay texto legible, devuelve {"translation":"","detected":""}.`;
+}
+
+async function callClaude(messages, system, modelOverride){
   const usingProxy = !!PROXY_URL;
   if(!usingProxy && !state.apiKey){ openModal(); throw new Error("Configura tu API key primero."); }
   const url = usingProxy ? PROXY_URL : "https://api.anthropic.com/v1/messages";
@@ -529,7 +534,7 @@ async function callClaude(messages, system){
   const res = await fetch(url,{
     method:"POST",
     headers,
-    body: JSON.stringify({ model: state.model, max_tokens: 1024, system, messages })
+    body: JSON.stringify({ model: modelOverride || state.model, max_tokens: 1024, system, messages })
   });
   if(!res.ok){
     let msg = "Error "+res.status;
@@ -548,7 +553,6 @@ function parseJSON(raw){
   return JSON.parse(t);
 }
 
-/* =================== Translate (text) =================== */
 $("#translateBtn").addEventListener("click", doTranslate);
 $("#src").addEventListener("keydown", e=>{ if((e.metaKey||e.ctrlKey)&&e.key==="Enter") doTranslate(); });
 
@@ -572,13 +576,43 @@ async function doTranslate(){
   }
 }
 
-/* =================== Render result card =================== */
 function renderResult(r, target){
   const tgtSpeech = LANGS[r.tgtCode].speech;
   const eng = state.model.includes("opus")?"Claude Opus":state.model.includes("haiku")?"Claude Haiku":"Claude Sonnet";
+  const el = $(target);
+
+  // Versión ligera para resultados de cámara: solo traducción + audio + botón "ver más"
+  if(r.isCamera){
+    el.innerHTML = `
+     <div class="rcard">
+       <div class="rtop">
+         <div class="rtrans">${esc(r.translation)}</div>
+         <div class="rorig">${esc(r.original)}</div>
+       </div>
+       <div class="raudio">
+         <button class="audio-btn" data-act="listen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> ESCUCHAR</button>
+         <button class="audio-btn" data-act="slow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> LENTO</button>
+       </div>
+       <button class="more-btn">VER MÁS DETALLES</button>
+       <div class="rfoot">
+         <button data-act="copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> COPIAR</button>
+         <button data-act="original"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg> ORIGINAL</button>
+         <button data-act="retry"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> REINTENTAR</button>
+       </div>
+     </div>`;
+    el.classList.add("show");
+    el.querySelector('[data-act="listen"]').onclick = ()=> speak(r.translation, tgtSpeech, 1);
+    el.querySelector('[data-act="slow"]').onclick   = ()=> speak(r.translation, tgtSpeech, .6);
+    el.querySelector('[data-act="copy"]').onclick   = ()=>{ navigator.clipboard?.writeText(r.translation); toast("Copiado ✓"); };
+    el.querySelector('[data-act="original"]').onclick= ()=> speak(r.original, LANGS[r.srcCode].speech, 1);
+    el.querySelector('[data-act="retry"]').onclick  = ()=>{ if(target==="#camResult") camAction(); else doTranslate(); };
+    el.querySelector('.more-btn').onclick = ()=> loadMoreDetails(target);
+    return;
+  }
+
+  // Versión completa (traducción de texto o "ver más" ya cargado)
   const exHTML = r.example ? `<div class="tip"><span class="ic">💬</span><div><b>Ejemplo:</b> ${esc(r.example)}${r.example_translation?`<br><span style="color:var(--muted-2)">${esc(r.example_translation)}</span>`:""}</div></div>` : "";
   const altHTML = r.alternative ? `<div class="ralt"><b>Alternativa:</b> ${esc(r.alternative)}</div>` : "";
-  const el = $(target);
   el.innerHTML = `
    <div class="rcard">
      <div class="rtop">
@@ -603,54 +637,45 @@ function renderResult(r, target){
      </div>
    </div>`;
   el.classList.add("show");
-  // wire buttons
   el.querySelector('[data-act="listen"]').onclick = ()=> speak(r.translation, tgtSpeech, 1);
   el.querySelector('[data-act="slow"]').onclick   = ()=> speak(r.translation, tgtSpeech, .6);
   el.querySelector('[data-act="copy"]').onclick   = ()=>{ navigator.clipboard?.writeText(r.translation); toast("Copiado ✓"); };
   el.querySelector('[data-act="original"]').onclick= ()=> speak(r.original, LANGS[r.srcCode].speech, 1);
-  el.querySelector('[data-act="retry"]').onclick  = ()=>{ if(target==="#result") doTranslate(); };
+  el.querySelector('[data-act="retry"]').onclick  = ()=>{ if(target==="#result") doTranslate(); else camAction(); };
 }
 function esc(s){ return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
 
-/* =================== Text-to-speech =================== */
 let voices=[];
 function loadVoices(){ voices = window.speechSynthesis ? speechSynthesis.getVoices() : []; }
 if(window.speechSynthesis){ loadVoices(); speechSynthesis.onvoiceschanged=loadVoices; }
-
-// Pick the most natural voice available for a language.
 function pickVoice(lang){
   const base = lang.split("-")[0];
   const match = voices.filter(v => v.lang===lang || v.lang.replace("_","-").startsWith(base));
   if(!match.length) return null;
-  // Higher score = more natural. Prefer Google/Natural/Premium/online voices, avoid "compact".
   const score = v => {
     const n = (v.name||"").toLowerCase();
     let s = 0;
-    if(n.includes("google")) s += 6;          // Chrome/Android network voices (very natural)
-    if(n.includes("natural")) s += 6;         // Edge/Windows neural voices
+    if(n.includes("google")) s += 6;
+    if(n.includes("natural")) s += 6;
     if(n.includes("premium")||n.includes("enhanced")||n.includes("neural")) s += 5;
-    if(/siri|samantha|anna|daniel|paulina|monica|helena|jorge|diego/.test(n)) s += 3; // good OS voices
-    if(!v.localService) s += 2;               // online voices usually sound better
-    if(n.includes("compact")) s -= 4;         // iOS low-quality voices
-    if(v.lang===lang) s += 1;                 // exact locale match
+    if(/siri|samantha|anna|daniel|paulina|monica|helena|jorge|diego/.test(n)) s += 3;
+    if(!v.localService) s += 2;
+    if(n.includes("compact")) s -= 4;
+    if(v.lang===lang) s += 1;
     return s;
   };
   return match.sort((a,b)=>score(b)-score(a))[0];
 }
-
 function speak(text, lang, rate){
   if(!window.speechSynthesis){ toast("Audio no disponible"); return; }
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(text);
-  u.lang=lang;
-  u.rate=rate;          // 1 = normal, .6 = lento
-  u.pitch=1;
+  u.lang=lang; u.rate=rate; u.pitch=1;
   const v=pickVoice(lang);
   if(v) u.voice=v;
   speechSynthesis.speak(u);
 }
 
-/* =================== Voice input (dictation) =================== */
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 let recog=null, recording=false;
 $("#voiceBtn").addEventListener("click", ()=>{
@@ -668,7 +693,6 @@ $("#voiceBtn").addEventListener("click", ()=>{
   recog.start();
 });
 
-/* =================== Camera + OCR translate =================== */
 let stream=null;
 $("#camBtn").addEventListener("click", camAction);
 async function camAction(){
@@ -684,26 +708,27 @@ async function camAction(){
     }
     return;
   }
-  // capture frame -> base64 -> Claude vision
   if(!PROXY_URL && !state.apiKey){ openModal(); return; }
   btn.disabled=true; btn.innerHTML='<span class="spin"></span>';
   try{
     const v=$("#video");
     const c=document.createElement("canvas");
-    const scale=Math.min(1, 1280/Math.max(v.videoWidth,v.videoHeight||1));
+    // Imagen más pequeña = subida más rápida (900px es suficiente para OCR de carteles/menús)
+    const scale=Math.min(1, 900/Math.max(v.videoWidth,v.videoHeight||1));
     c.width=(v.videoWidth||640)*scale; c.height=(v.videoHeight||480)*scale;
     c.getContext("2d").drawImage(v,0,0,c.width,c.height);
-    const b64=c.toDataURL("image/jpeg",.8).split(",")[1];
+    const b64=c.toDataURL("image/jpeg",.72).split(",")[1];
     const srcL=LANGS[state.src], tgtL=LANGS[state.tgt];
-    const sys = buildSystem(srcL,tgtL) + `\nAdemás: el usuario te envía una FOTO con texto. Léelo (OCR), y añade el campo "detected" con el texto original que leíste en la imagen. Si no hay texto legible, pon translation:"" y detected:"".`;
+    // Prompt LIGERO + modelo Haiku (rápido) para la cámara
     const raw=await callClaude([{role:"user",content:[
       {type:"image",source:{type:"base64",media_type:"image/jpeg",data:b64}},
-      {type:"text",text:`Lee el texto de esta imagen (está en ${srcL.full}) y tradúcelo a ${tgtL.full}.`}
-    ]}], sys);
+      {type:"text",text:`Lee el texto (está en ${srcL.full}) y tradúcelo a ${tgtL.full} de forma natural cotidiana.`}
+    ]}], buildSystemCamera(srcL,tgtL), "claude-haiku-4-5-20251001");
     const r=parseJSON(raw);
     r.original=r.detected||""; r.srcCode=state.src; r.tgtCode=state.tgt;
+    r.isCamera=true; // marca para mostrar "ver más detalles"
     $("#detected").textContent="DETECTED: "+((r.detected||"—").slice(0,40));
-    if(r.translation){ renderResult(r,"#camResult"); saveHistory(r); }
+    if(r.translation){ state.lastCamResult=r; renderResult(r,"#camResult"); saveHistory(r); }
     else toast("No detecté texto legible");
   }catch(err){
     toast(err.message.slice(0,60));
@@ -712,7 +737,29 @@ async function camAction(){
   }
 }
 
-/* =================== History =================== */
+/* "Ver más detalles": segunda llamada rápida para enriquecer un resultado de cámara */
+async function loadMoreDetails(target){
+  const r = target==="#result" ? state.lastResult : state.lastCamResult;
+  if(!r) return;
+  const btn = $(target+" .more-btn");
+  if(btn){ btn.disabled=true; btn.innerHTML='<span class="spin" style="border-color:rgba(0,0,0,.15);border-top-color:#0a0a0a"></span> CARGANDO...'; }
+  try{
+    const srcL=LANGS[r.srcCode], tgtL=LANGS[r.tgtCode];
+    const raw = await callClaude(
+      [{role:"user",content:`Analiza esta traducción y devuelve el JSON completo (register, register_note, example, example_translation, alternative). Original en ${srcL.full}: "${r.original}". Traducción en ${tgtL.full}: "${r.translation}".`}],
+      buildSystem(srcL,tgtL),
+      "claude-haiku-4-5-20251001"
+    );
+    const more = parseJSON(raw);
+    Object.assign(r, more, {isCamera:false}); // enriquecemos y quitamos el flag
+    renderResult(r, target);
+    saveHistory(r);
+  }catch(err){
+    toast(err.message.slice(0,60));
+    if(btn){ btn.disabled=false; btn.textContent="VER MÁS DETALLES"; }
+  }
+}
+
 function saveHistory(r){
   if(!r.translation) return;
   state.history.unshift({
@@ -748,7 +795,6 @@ function renderHistory(){
   $("#histClear").onclick=()=>{ state.history=[]; store.set("ez_hist","[]"); renderHistory(); toast("Historial borrado"); };
 }
 
-/* =================== API key modal =================== */
 function openModal(){
   $("#keyInput").value=state.apiKey;
   $("#modelSel").value=state.model;
@@ -774,7 +820,7 @@ $("#keySave").addEventListener("click", ()=>{
 $("#modal").addEventListener("click", e=>{ if(e.target.id==="modal") $("#modal").classList.remove("show"); });
 updateKeyStatus();
 
-/* =================== PWA: registrar service worker =================== */
+/* PWA */
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("sw.js").catch(() => {});
